@@ -40,7 +40,7 @@ export default function CheckoutPage() {
       setActiveSessions(sessions);
     } catch (error) {
       console.error('Error fetching active sessions:', error);
-      toast.error('Failed to load active sessions');
+      toast.error(error instanceof Error ? error.message : 'Failed to load active sessions');
     } finally {
       setIsLoading(false);
     }
@@ -99,7 +99,7 @@ export default function CheckoutPage() {
       } : null);
     } catch (error) {
       console.error('Error loading billing preview:', error);
-      toast.error('Failed to calculate billing preview');
+      toast.error(error instanceof Error ? error.message : 'Failed to calculate billing preview');
     } finally {
       setIsLoadingPreview(false);
     }
@@ -131,7 +131,7 @@ export default function CheckoutPage() {
       await fetchActiveSessions();
     } catch (error) {
       console.error('Error processing checkout:', error);
-      toast.error('Failed to process checkout');
+      toast.error(error instanceof Error ? error.message : 'Failed to process checkout');
     } finally {
       setIsProcessingCheckout(false);
     }

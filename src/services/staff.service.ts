@@ -8,7 +8,8 @@ export class StaffService {
       const response = await fetch(`${API_BASE_URL}/staff`);
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
       }
       
       const data: ApiResponse<Staff[]> = await response.json();
@@ -24,7 +25,8 @@ export class StaffService {
       const response = await fetch(`${API_BASE_URL}/staff/${id}`);
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
       }
       
       const data: ApiResponse<Staff> = await response.json();

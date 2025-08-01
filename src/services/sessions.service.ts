@@ -8,7 +8,8 @@ export class SessionsService {
       const response = await fetch(`${API_BASE_URL}/sessions`);
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
       }
       
       const data: ApiResponse<Session[]> = await response.json();
@@ -24,7 +25,8 @@ export class SessionsService {
       const response = await fetch(`${API_BASE_URL}/sessions/active`);
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
       }
       
       const data: ApiResponse<Session[]> = await response.json();
@@ -40,7 +42,8 @@ export class SessionsService {
       const response = await fetch(`${API_BASE_URL}/sessions/${sessionId}`);
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
       }
       
       const data: ApiResponse<Session> = await response.json();
@@ -56,7 +59,8 @@ export class SessionsService {
       const response = await fetch(`${API_BASE_URL}/sessions/vehicle/${numberPlate}`);
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
       }
       
       const data: ApiResponse<SessionByVehicle> = await response.json();
@@ -78,7 +82,8 @@ export class SessionsService {
       });
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
       }
       
       const data = await response.json();

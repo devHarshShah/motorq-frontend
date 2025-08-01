@@ -130,7 +130,8 @@ class BillingService {
       const response = await fetch(url);
       
       if (!response.ok) {
-        throw new Error(`Failed to fetch billing records: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `Failed to fetch billing records: ${response.statusText}`);
       }
       
       return await response.json();
@@ -146,7 +147,8 @@ class BillingService {
       const response = await fetch(`${API_BASE_URL}/billing/statistics`);
       
       if (!response.ok) {
-        throw new Error(`Failed to fetch billing statistics: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `Failed to fetch billing statistics: ${response.statusText}`);
       }
       
       return await response.json();
@@ -164,7 +166,8 @@ class BillingService {
       );
       
       if (!response.ok) {
-        throw new Error(`Failed to fetch revenue trends: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `Failed to fetch revenue trends: ${response.statusText}`);
       }
       
       return await response.json();
@@ -180,7 +183,8 @@ class BillingService {
       const response = await fetch(`${API_BASE_URL}/billing/unpaid`);
       
       if (!response.ok) {
-        throw new Error(`Failed to fetch unpaid bills: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `Failed to fetch unpaid bills: ${response.statusText}`);
       }
       
       return await response.json();
@@ -196,7 +200,8 @@ class BillingService {
       const response = await fetch(`${API_BASE_URL}/billing/pricing-config`);
       
       if (!response.ok) {
-        throw new Error(`Failed to fetch pricing config: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `Failed to fetch pricing config: ${response.statusText}`);
       }
       
       return await response.json();
@@ -219,7 +224,8 @@ class BillingService {
       );
       
       if (!response.ok) {
-        throw new Error(`Failed to calculate billing preview: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `Failed to calculate billing preview: ${response.statusText}`);
       }
       
       return await response.json();
@@ -244,7 +250,8 @@ class BillingService {
       });
       
       if (!response.ok) {
-        throw new Error(`Failed to update payment status: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `Failed to update payment status: ${response.statusText}`);
       }
       
       return await response.json();
@@ -260,7 +267,8 @@ class BillingService {
       const response = await fetch(`${API_BASE_URL}/billing/${billingId}`);
       
       if (!response.ok) {
-        throw new Error(`Failed to fetch billing record: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `Failed to fetch billing record: ${response.statusText}`);
       }
       
       return await response.json();
@@ -290,7 +298,8 @@ class BillingService {
       const response = await fetch(url);
       
       if (!response.ok) {
-        throw new Error(`Failed to fetch peak hour analysis: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `Failed to fetch peak hour analysis: ${response.statusText}`);
       }
       
       return await response.json();

@@ -27,7 +27,8 @@ export class VehiclesService {
       const response = await fetch(`${API_BASE_URL}/vehicles`);
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
       }
       
       const data: ApiResponse<Vehicle[]> = await response.json();
@@ -49,7 +50,8 @@ export class VehiclesService {
       });
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
       }
       
       const data: ApiResponse<Vehicle> = await response.json();
@@ -79,7 +81,8 @@ export class VehiclesService {
       const response = await fetch(`${API_BASE_URL}/vehicles/search?${params}`);
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
       }
       
       return await response.json();

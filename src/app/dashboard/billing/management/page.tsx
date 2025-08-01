@@ -39,7 +39,7 @@ export default function BillingManagement() {
       setBillingRecords(data);
     } catch (error) {
       console.error('Error fetching billing records:', error);
-      toast.error('Failed to load billing records');
+      toast.error(error instanceof Error ? error.message : 'Failed to load billing records');
     } finally {
       setIsLoading(false);
     }
@@ -61,7 +61,7 @@ export default function BillingManagement() {
       toast.success(`Payment marked as ${isPaid ? 'paid' : 'unpaid'}`);
     } catch (error) {
       console.error('Error updating payment status:', error);
-      toast.error('Failed to update payment status');
+      toast.error(error instanceof Error ? error.message : 'Failed to update payment status');
     }
   };
 

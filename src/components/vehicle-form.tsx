@@ -37,7 +37,7 @@ export default function VehicleManagement() {
         setStaff(staffData)
       } catch (error) {
         console.error('Failed to load staff:', error)
-        toast.error('Failed to load staff members')
+        toast.error(error instanceof Error ? error.message : 'Failed to load staff members')
       } finally {
         setIsLoadingStaff(false)
       }
@@ -123,13 +123,7 @@ export default function VehicleManagement() {
       
     } catch (error: any) {
       console.error('Failed to register vehicle:', error)
-      toast.error(
-        'Failed to register vehicle',
-        {
-          description: error.message || 'Please try again later.',
-          icon: <AlertCircle className="w-4 h-4" />
-        }
-      )
+      toast.error(error instanceof Error ? error.message : 'Failed to register vehicle')
     } finally {
       setIsLoading(false)
     }
