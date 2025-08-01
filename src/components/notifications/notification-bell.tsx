@@ -66,17 +66,6 @@ export function NotificationBell({ className }: NotificationBellProps) {
               {notificationCount > 99 ? '99+' : notificationCount}
             </Badge>
           )}
-
-          {/* Connection Status Indicator */}
-          <div
-            className={cn(
-              "absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full",
-              isConnected 
-                ? "bg-green-500 dark:bg-green-400" 
-                : "bg-gray-400 dark:bg-gray-500"
-            )}
-            title={isConnected ? "Connected to live updates" : "Disconnected"}
-          />
         </Button>
       </PopoverTrigger>
 

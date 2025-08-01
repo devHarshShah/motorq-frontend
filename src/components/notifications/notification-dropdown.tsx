@@ -55,9 +55,9 @@ export function NotificationDropdown({
   const severityStats = getSeverityStats();
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-background border border-border rounded-md shadow-lg h-[500px] flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 pb-2">
+      <div className="flex items-center justify-between p-4 pb-2 flex-shrink-0">
         <div className="space-y-1">
           <h4 className="text-sm font-medium leading-none">
             Duration Alerts
@@ -102,7 +102,7 @@ export function NotificationDropdown({
       </div>
 
       {/* Connection Status */}
-      <div className="px-4 pb-2">
+      <div className="px-4 pb-2 flex-shrink-0">
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <div
             className={cn(
@@ -119,7 +119,7 @@ export function NotificationDropdown({
       {notifications.length > 0 && (
         <>
           {/* Severity Summary */}
-          <div className="px-4 pb-2">
+          <div className="px-4 pb-2 flex-shrink-0">
             <div className="flex items-center gap-2 text-xs">
               {severityStats.critical > 0 && (
                 <Badge variant="destructive" className="text-xs">
@@ -144,11 +144,11 @@ export function NotificationDropdown({
         </>
       )}
 
-      <Separator />
+      <Separator className="flex-shrink-0" />
 
       {/* Notifications List */}
       {notifications.length === 0 ? (
-        <div className="p-8 text-center">
+        <div className="p-8 text-center flex-1 flex items-center justify-center">
           <div className="text-muted-foreground">
             <IconCheck className="mx-auto h-12 w-12 mb-4 opacity-50" />
             <p className="text-sm">No duration alerts</p>
@@ -158,26 +158,28 @@ export function NotificationDropdown({
           </div>
         </div>
       ) : (
-        <ScrollArea className="h-full max-h-96">
-          <div className="p-1">
-            {notifications.map((notification, index) => (
-              <NotificationItem
-                key={notification.sessionId}
-                notification={notification}
-                onMarkAsRead={onMarkAsRead}
-                onClose={onClose}
-                className={index !== notifications.length - 1 ? "border-b" : ""}
-              />
-            ))}
-          </div>
-        </ScrollArea>
+        <div className="flex-1 overflow-hidden">
+          <ScrollArea className="h-full">
+            <div className="p-1">
+              {notifications.map((notification, index) => (
+                <NotificationItem
+                  key={notification.sessionId}
+                  notification={notification}
+                  onMarkAsRead={onMarkAsRead}
+                  onClose={onClose}
+                  className={index !== notifications.length - 1 ? "border-b" : ""}
+                />
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
       )}
 
       {/* Footer */}
       {notifications.length > 0 && (
         <>
-          <Separator />
-          <div className="p-2">
+          <Separator className="flex-shrink-0" />
+          <div className="p-2 flex-shrink-0">
             <Button 
               variant="ghost" 
               className="w-full text-xs text-muted-foreground hover:text-foreground"
