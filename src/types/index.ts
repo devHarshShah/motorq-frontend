@@ -138,3 +138,37 @@ export interface SessionFilter {
   dateTo?: string;
   isPaid?: boolean;
 }
+
+// Notification Types
+export interface DurationAlert {
+  sessionId: string;
+  vehicleNumberPlate: string;
+  slotLocation: string;
+  entryTime: string;
+  currentDurationHours: number;
+  staffName: string;
+  vehicleType: 'CAR' | 'BIKE' | 'EV' | 'HANDICAP_ACCESSIBLE';
+  isNotified: boolean;
+  notifiedAt?: string;
+}
+
+export interface NotificationResponse {
+  success: boolean;
+  count: number;
+  data: DurationAlert[];
+  message?: string;
+}
+
+export interface NotificationCountResponse {
+  success: boolean;
+  count: number;
+}
+
+export type NotificationSeverity = 'warning' | 'danger' | 'critical';
+
+export interface NotificationStreamEvent {
+  type: 'initial' | 'update';
+  alerts: DurationAlert[];
+  count: number;
+  timestamp?: string;
+}
