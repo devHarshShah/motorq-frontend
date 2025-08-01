@@ -67,9 +67,9 @@ export interface Session {
   billingType: 'HOURLY' | 'DAY_PASS';
   createdAt: string;
   updatedAt: string;
-  vehicle?: Vehicle;
-  slot?: Slot;
-  staff?: Staff;
+  vehicle: Vehicle;
+  slot: Slot;
+  staff: Staff;
   billing?: Billing;
 }
 

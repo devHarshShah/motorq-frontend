@@ -67,21 +67,22 @@ export class SessionsService {
     }
   }
 
-  static async endParkingSession(sessionId: string): Promise<Session> {
+  static async endParkingSession(sessionId: string, options?: { useSlabPricing?: boolean }): Promise<any> {
     try {
       const response = await fetch(`${API_BASE_URL}/sessions/${sessionId}/end`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify(options || {}),
       });
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      const data: ApiResponse<Session> = await response.json();
-      return data.data || data as Session;
+      const data = await response.json();
+      return data;
     } catch (error) {
       console.error('Error ending parking session:', error);
       throw error;

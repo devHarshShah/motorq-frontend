@@ -223,6 +223,7 @@ export function SlotsTable({ slots, loading, onFiltersChange, onSlotsUpdate }: S
       setFormData(prev => ({
         ...prev,
         vehicleNumberPlate: activeSession.vehicle?.numberPlate || "",
+        vehicleType: activeSession.vehicle?.type || selectedSlot.type,
         staffId: activeSession.staffId || "",
         billingType: activeSession.billingType || "HOURLY",
         overrideSlotId: ""
@@ -239,6 +240,16 @@ export function SlotsTable({ slots, loading, onFiltersChange, onSlotsUpdate }: S
     }
 
     if (isOverrideMode && !formData.overrideSlotId) {
+      const availableCompatibleSlots = slots.filter(slot => 
+        slot.status === 'AVAILABLE' && 
+        slot.type === formData.vehicleType
+      )
+      
+      if (availableCompatibleSlots.length === 0) {
+        toast.error(`No available ${formData.vehicleType} slots for override`)
+        return
+      }
+      
       toast.error('Override slot selection is required')
       return
     }
@@ -432,11 +443,27 @@ export function SlotsTable({ slots, loading, onFiltersChange, onSlotsUpdate }: S
                     <SelectValue placeholder="Select available slot for existing vehicle" />
                   </SelectTrigger>
                   <SelectContent>
-                    {slots.filter(slot => slot.status === 'AVAILABLE').map((slot) => (
-                      <SelectItem key={slot.id} value={slot.id}>
-                        {slot.location} ({slot.type})
-                      </SelectItem>
-                    ))}
+                    {slots
+                      .filter(slot => 
+                        slot.status === 'AVAILABLE' && 
+                        slot.type === formData.vehicleType
+                      )
+                      .length === 0 ? (
+                        <SelectItem value="" disabled>
+                          No available {formData.vehicleType} slots
+                        </SelectItem>
+                      ) : (
+                        slots
+                          .filter(slot => 
+                            slot.status === 'AVAILABLE' && 
+                            slot.type === formData.vehicleType
+                          )
+                          .map((slot) => (
+                            <SelectItem key={slot.id} value={slot.id}>
+                              {slot.location} ({slot.type})
+                            </SelectItem>
+                          ))
+                      )}
                   </SelectContent>
                 </Select>
               </div>

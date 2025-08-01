@@ -11,7 +11,12 @@ import {
   IconClockPause,
   IconReceipt2,
   IconInnerShadowTop,
-  IconAnalyze
+  IconAnalyze,
+  IconChartBar,
+  IconSettings,
+  IconCashBanknote,
+  IconList,
+  IconEye
 } from '@tabler/icons-react';
 
 import { NavDocuments } from '@/components/nav-documents';
@@ -38,27 +43,32 @@ const data = {
     items: [
       { name: 'View All Vehicles', url: '/dashboard/vehicles', icon: IconCar },
       { name: 'Create Entry', url: '/dashboard/vehicles/create-entry', icon: IconPlus },
-      { name: 'Mark Exit', url: '#', icon: IconLogout }
+      { name: 'Vehicle Checkout', url: '/dashboard/checkout', icon: IconLogout }
     ]
   },
   slotGroup: {
     groupName: 'Slot',
     items: [
-      { name: 'View All Slots', url: '#', icon: IconParking },
-      { name: 'Update Slot Status', url: '#', icon: IconEdit },
-      { name: 'Manual Slot Assignment', url: '#', icon: IconUserCheck }
+      { name: 'View All Slots', url: '/dashboard/slots', icon: IconParking },
+      { name: 'Slot Management', url: '/dashboard/slots', icon: IconEdit },
+      { name: 'Slot Statistics', url: '/dashboard/slots', icon: IconChartBar }
     ]
   },
   sessionGroup: {
     groupName: 'Session',
     items: [
-      { name: 'View Active Sessions', url: '#', icon: IconCar },
-      { name: 'Force End Session', url: '#', icon: IconClockPause }
+      { name: 'Active Sessions', url: '/dashboard/vehicles', icon: IconEye },
+      { name: 'Session History', url: '/dashboard/vehicles', icon: IconList },
+      { name: 'End Session', url: '/dashboard/checkout', icon: IconClockPause }
     ]
   },
   billingGroup: {
     groupName: 'Billing',
-    items: [{ name: 'View Billings', url: '#', icon: IconReceipt2 }]
+    items: [
+      { name: 'Revenue Dashboard', url: '/dashboard/billing', icon: IconChartBar },
+      { name: 'Billing Management', url: '/dashboard/billing/management', icon: IconReceipt2 },
+      { name: 'Payment Processing', url: '/dashboard/billing/management', icon: IconCashBanknote }
+    ]
   }
 };
 

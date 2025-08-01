@@ -1,5 +1,24 @@
 import { Vehicle, VehicleEntry, ApiResponse } from '@/types';
 
+export interface VehicleSearchResult {
+  id: string;
+  numberPlate: string;
+  type: 'CAR' | 'BIKE' | 'EV' | 'HANDICAP_ACCESSIBLE';
+  isActive: boolean;
+  totalSessions: number;
+  activeSession?: {
+    slot: {
+      location: string;
+      type: string;
+    };
+    entryTime: string;
+    billing: {
+      amount: number;
+      isPaid: boolean;
+    }[];
+  } | null;
+}
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 
 export class VehiclesService {
@@ -37,6 +56,35 @@ export class VehiclesService {
       return data.data || data as Vehicle;
     } catch (error) {
       console.error('Error creating vehicle entry:', error);
+      throw error;
+    }
+  }
+
+  static async searchVehiclesRealtime(
+    query: string, 
+    limit: number = 10, 
+    includeActive: boolean = false
+  ): Promise<VehicleSearchResult[]> {
+    try {
+      if (!query || query.length < 2) {
+        return [];
+      }
+
+      const params = new URLSearchParams({
+        q: query,
+        limit: limit.toString(),
+        includeActive: includeActive.toString()
+      });
+
+      const response = await fetch(`${API_BASE_URL}/vehicles/search?${params}`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('Error searching vehicles:', error);
       throw error;
     }
   }
