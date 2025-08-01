@@ -51,14 +51,12 @@ const data = {
     items: [
       { name: 'View All Slots', url: '/dashboard/slots', icon: IconParking },
       { name: 'Slot Management', url: '/dashboard/slots', icon: IconEdit },
-      { name: 'Slot Statistics', url: '/dashboard/slots', icon: IconChartBar }
     ]
   },
   sessionGroup: {
     groupName: 'Session',
     items: [
-      { name: 'Active Sessions', url: '/dashboard/vehicles', icon: IconEye },
-      { name: 'Session History', url: '/dashboard/vehicles', icon: IconList },
+      { name: 'Active Sessions', url: '/dashboard/sessions', icon: IconEye },
       { name: 'End Session', url: '/dashboard/checkout', icon: IconClockPause }
     ]
   },
@@ -66,8 +64,7 @@ const data = {
     groupName: 'Billing',
     items: [
       { name: 'Revenue Dashboard', url: '/dashboard/billing', icon: IconChartBar },
-      { name: 'Billing Management', url: '/dashboard/billing/management', icon: IconReceipt2 },
-      { name: 'Payment Processing', url: '/dashboard/billing/management', icon: IconCashBanknote }
+      { name: 'Billing Management', url: '/dashboard/billing/management', icon: IconReceipt2 }
     ]
   }
 };

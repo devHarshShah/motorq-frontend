@@ -19,6 +19,18 @@ export default function Page() {
   const [slotsLoading, setSlotsLoading] = React.useState(true);
   const [sessionsLoading, setSessionsLoading] = React.useState(true);
 
+  const fetchSlots = React.useCallback(async () => {
+    setSlotsLoading(true);
+    try {
+      const data = await SlotsService.getAllSlots();
+      setSlots(data);
+    } catch (error) {
+      console.error('Error fetching slots:', error);
+    } finally {
+      setSlotsLoading(false);
+    }
+  }, []);
+
   React.useEffect(() => {
     const fetchVehicles = async () => {
       try {
@@ -28,17 +40,6 @@ export default function Page() {
         console.error('Error fetching vehicles:', error);
       } finally {
         setVehiclesLoading(false);
-      }
-    };
-
-    const fetchSlots = async () => {
-      try {
-        const data = await SlotsService.getAllSlots();
-        setSlots(data);
-      } catch (error) {
-        console.error('Error fetching slots:', error);
-      } finally {
-        setSlotsLoading(false);
       }
     };
 
@@ -56,7 +57,7 @@ export default function Page() {
     fetchVehicles();
     fetchSlots();
     fetchSessions();
-  }, []);
+  }, [fetchSlots]);
 
   return (
     <div>
@@ -73,7 +74,7 @@ export default function Page() {
           <VehiclesTable vehicles={vehicles} loading={vehiclesLoading} />
         </TabsContent>
         <TabsContent value="slots">
-          <SlotsTable slots={slots} loading={slotsLoading} />
+          <SlotsTable slots={slots} loading={slotsLoading} onSlotsUpdate={fetchSlots} />
         </TabsContent>
         <TabsContent value="sessions">
           <SessionsTable sessions={sessions} loading={sessionsLoading} />
