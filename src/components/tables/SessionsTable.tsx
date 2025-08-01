@@ -15,13 +15,6 @@ const formatDuration = (minutes?: number) => {
 
 const columns: ColumnDef<Session>[] = [
   {
-    accessorKey: "id",
-    header: "Session ID",
-    cell: ({ row }) => (
-      <div className="font-mono text-sm">{row.getValue("id")}</div>
-    ),
-  },
-  {
     id: "vehicleNumberPlate",
     header: "Vehicle",
     accessorFn: (row) => row.vehicle?.numberPlate,

@@ -35,7 +35,7 @@ const data = {
     groupName: "Vehicle",
     items: [
       { name: "View All Vehicles", url: "#", icon: IconCar },
-      { name: "Create Entry", url: "#", icon: IconPlus },
+      { name: "Create Entry", url: "/dashboard/create-entry", icon: IconPlus },
       { name: "Mark Exit", url: "#", icon: IconLogout },
     ],
   },
@@ -86,9 +86,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavDocuments groupName={data.sessionGroup.groupName} items={data.sessionGroup.items} />
         <NavDocuments groupName={data.billingGroup.groupName} items={data.billingGroup.items} />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
     </Sidebar>
   )
 }

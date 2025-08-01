@@ -11,6 +11,7 @@ export interface Vehicle {
 export interface VehicleEntry {
   numberPlate: string;
   type: 'CAR' | 'BIKE' | 'EV' | 'HANDICAP_ACCESSIBLE';
+  staffId: string;
   ownerName?: string;
   ownerPhone?: string;
 }

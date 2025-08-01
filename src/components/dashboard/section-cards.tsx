@@ -2,14 +2,10 @@
 
 import { useEffect, useState } from "react"
 import { Badge } from "@/components/ui/badge"
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
-import { SlotsService, type SlotStatistics } from "@/services/slots.service"
+import { SlotsService } from "@/services/slots.service"
+import type { SlotStatistics } from "@/types"
 
 export function SectionCards() {
   const [stats, setStats] = useState<SlotStatistics | null>(null)
@@ -23,8 +19,8 @@ export function SectionCards() {
         const data = await SlotsService.getStatistics()
         setStats(data)
       } catch (err) {
-        setError('Failed to load slot statistics')
-        console.error('Error fetching slot statistics:', err)
+        setError("Failed to load slot statistics")
+        console.error("Error fetching slot statistics:", err)
       } finally {
         setLoading(false)
       }
@@ -35,7 +31,7 @@ export function SectionCards() {
 
   if (loading) {
     return (
-      <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 px-4 lg:px-6 md:grid-cols-4 *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs">
         {[1, 2, 3, 4].map((i) => (
           <Card key={i} className="@container/card">
             <CardHeader>
@@ -52,13 +48,13 @@ export function SectionCards() {
   if (error || !stats) {
     return (
       <div className="px-4 lg:px-6">
-        <div className="text-red-500">{error || 'Failed to load statistics'}</div>
+        <div className="text-red-500">{error || "Failed to load statistics"}</div>
       </div>
     )
   }
 
   return (
-    <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-4 *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs">
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Total Slots</CardDescription>
