@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import * as React from "react"
+import * as React from 'react';
 import {
   IconCar,
   IconPlus,
@@ -11,10 +11,11 @@ import {
   IconClockPause,
   IconReceipt2,
   IconInnerShadowTop,
-} from "@tabler/icons-react"
+  IconAnalyze
+} from '@tabler/icons-react';
 
-import { NavDocuments } from "@/components/nav-documents"
-import { NavUser } from "@/components/nav-user"
+import { NavDocuments } from '@/components/nav-documents';
+import { NavUser } from '@/components/nav-user';
 import {
   Sidebar,
   SidebarContent,
@@ -22,45 +23,44 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar"
+  SidebarMenuItem
+} from '@/components/ui/sidebar';
+import { NavMain } from './nav-main';
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: 'shadcn',
+    email: 'm@example.com',
+    avatar: '/avatars/shadcn.jpg'
   },
   vehicleGroup: {
-    groupName: "Vehicle",
+    groupName: 'Vehicle',
     items: [
-      { name: "View All Vehicles", url: "#", icon: IconCar },
-      { name: "Create Entry", url: "/dashboard/create-entry", icon: IconPlus },
-      { name: "Mark Exit", url: "#", icon: IconLogout },
-    ],
+      { name: 'View All Vehicles', url: '/dashboard/vehicles', icon: IconCar },
+      { name: 'Create Entry', url: '/dashboard/vehicles/create-entry', icon: IconPlus },
+      { name: 'Mark Exit', url: '#', icon: IconLogout }
+    ]
   },
   slotGroup: {
-    groupName: "Slot",
+    groupName: 'Slot',
     items: [
-      { name: "View All Slots", url: "#", icon: IconParking },
-      { name: "Update Slot Status", url: "#", icon: IconEdit },
-      { name: "Manual Slot Assignment", url: "#", icon: IconUserCheck },
-    ],
+      { name: 'View All Slots', url: '#', icon: IconParking },
+      { name: 'Update Slot Status', url: '#', icon: IconEdit },
+      { name: 'Manual Slot Assignment', url: '#', icon: IconUserCheck }
+    ]
   },
   sessionGroup: {
-    groupName: "Session",
+    groupName: 'Session',
     items: [
-      { name: "View Active Sessions", url: "#", icon: IconCar },
-      { name: "Force End Session", url: "#", icon: IconClockPause },
-    ],
+      { name: 'View Active Sessions', url: '#', icon: IconCar },
+      { name: 'Force End Session', url: '#', icon: IconClockPause }
+    ]
   },
   billingGroup: {
-    groupName: "Billing",
-    items: [
-      { name: "View Billings", url: "#", icon: IconReceipt2 },
-    ],
-  },
-}
+    groupName: 'Billing',
+    items: [{ name: 'View Billings', url: '#', icon: IconReceipt2 }]
+  }
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -68,10 +68,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
-            >
+            <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <a href="#">
                 <IconInnerShadowTop className="!size-5" />
                 <span className="text-base font-semibold">Vehicle Admin</span>
@@ -81,11 +78,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
+        <NavMain
+          items={[
+            {
+              title: 'Dashboard',
+              url: '/dashboard',
+              icon: IconAnalyze
+            }
+          ]}
+        />
+
         <NavDocuments groupName={data.vehicleGroup.groupName} items={data.vehicleGroup.items} />
         <NavDocuments groupName={data.slotGroup.groupName} items={data.slotGroup.items} />
         <NavDocuments groupName={data.sessionGroup.groupName} items={data.sessionGroup.items} />
         <NavDocuments groupName={data.billingGroup.groupName} items={data.billingGroup.items} />
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

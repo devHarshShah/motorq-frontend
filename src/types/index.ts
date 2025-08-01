@@ -12,8 +12,7 @@ export interface VehicleEntry {
   numberPlate: string;
   type: 'CAR' | 'BIKE' | 'EV' | 'HANDICAP_ACCESSIBLE';
   staffId: string;
-  ownerName?: string;
-  ownerPhone?: string;
+  billingType: 'HOURLY' | 'DAY_PASS';
 }
 
 // Slot Types
